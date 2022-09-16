@@ -43,7 +43,7 @@ public class AppController {
 	@GetMapping("/user")
 	public String showUserProfileUpdate(Model model, @AuthenticationPrincipal CustomUserDetails loggedUser) {
 		String userEmail = loggedUser.getUsername();
-        User user = userRepo.findByEmail(userEmail); // or service.getByEmail() if there is a service class
+        	User user = userRepo.findByEmail(userEmail); // or service.getByEmail() if there is a service class
 		model.addAttribute("user", user);
 
 		return "user_update";
@@ -76,8 +76,10 @@ public class AppController {
 	public String deleteUser(@AuthenticationPrincipal CustomUserDetails loggedUser, 
 	RedirectAttributes redirectAttributes) {
 		String userEmail = loggedUser.getUsername();
-        User user = userRepo.findByEmail(userEmail);
+        	User user = userRepo.findByEmail(userEmail);
+		
 		user.setisActive(false);
+		userRepo.save(user);
 
 		redirectAttributes.addFlashAttribute("message", "You have deleted your account successfully.");
 		
