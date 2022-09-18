@@ -43,7 +43,7 @@ public class AppController {
 	@GetMapping("/user")
 	public String showUserProfileUpdate(Model model, @AuthenticationPrincipal CustomUserDetails loggedUser) {
 		String userEmail = loggedUser.getUsername();
-        	User user = userRepo.findByEmail(userEmail); // or service.getByEmail() if there is a service class
+        User user = userRepo.findByEmail(userEmail);
 		model.addAttribute("user", user);
 
 		return "user_update";
@@ -58,6 +58,11 @@ public class AppController {
 		loggedUser.setLastName(user.getLastName());
 		loggedUser.setAddress(user.getAddress());
 		loggedUser.setBirthDate(user.getBirthDate());
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		userRepo.save(user);
 
 		redirectAttributes.addFlashAttribute("message", "The details have been updated.");
 
@@ -76,7 +81,7 @@ public class AppController {
 	public String deleteUser(@AuthenticationPrincipal CustomUserDetails loggedUser, 
 	RedirectAttributes redirectAttributes) {
 		String userEmail = loggedUser.getUsername();
-        	User user = userRepo.findByEmail(userEmail);
+        User user = userRepo.findByEmail(userEmail);
 		
 		user.setisActive(false);
 		userRepo.save(user);

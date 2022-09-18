@@ -22,10 +22,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, length = 45) //unique = true, 
+	@Column(name = "email", nullable = false, unique = true, length = 45)
 	private String email;
 	
-	@Column(nullable = false, length = 64)
+	@Column(name = "password", nullable = false, length = 64)
 	private String password;
 	
 	@Column(name = "first_name", nullable = false, length = 20)
@@ -40,6 +40,7 @@ public class User {
 	@Column(name = "birth_date", nullable = false, columnDefinition = "DATE")
 	private LocalDate birthDate;
 
+	@Column(name = "is_active", nullable = false)
 	private boolean isActive = true;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
