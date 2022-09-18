@@ -1,6 +1,9 @@
 package com.homework;
 
 import org.junit.jupiter.api.Test;
+
+import com.homework.user.Role;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoleEntityTests {
