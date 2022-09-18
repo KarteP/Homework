@@ -34,6 +34,7 @@
 						<th>Birth Date</th>
 						<th>Is Activated</th>
 						<th>Roles</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,6 +47,7 @@
 						<td th:text="${user.birthDate}">Birth date</td>
 						<td th:text="${user.isActive}">Is active</td>
 						<td th:text="${user.Roles}">Roles</td>
+						<td><a th:href="@{'/users/edit/' + ${user.id}}">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>

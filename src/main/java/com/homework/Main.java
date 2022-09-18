@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //https://www.tutorialspoint.com/how-to-create-a-currency-converter-in-javascript
 //https://stackoverflow.com/questions/70618518/when-does-spring-parse-string-to-localdate
 //https://spring.io/guides/gs/testing-web/
+//https://www.codejava.net/frameworks/spring-boot/spring-security-add-roles-to-user-examples
 
 
 @SpringBootApplication
