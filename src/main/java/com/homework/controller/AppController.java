@@ -3,7 +3,6 @@ package com.homework.controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,11 +35,6 @@ public class AppController {
 	
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
-		User user = new User();
-
-		Role roleUser = roleRepo.findByName("User");
-        user.addRole(roleUser);
-
 		model.addAttribute("user", new User());
 		
 		return "register";
@@ -51,6 +45,10 @@ public class AppController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+
+		Role roleUser = roleRepo.findByName("USER");
+        user.addRole(roleUser);
+
 		userRepo.save(user);
 		
 		return "register_success";
@@ -97,6 +95,7 @@ public class AppController {
 	public String editUser(@PathVariable("id") Long id, Model model) {
 		User user = userRepo.getReferenceById(id);
 		List<Role> listRoles = roleRepo.findAll();
+
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		return "user_form";
