@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,24 +20,34 @@ import com.homework.user.RoleRepository;
 @Rollback(false)
 public class RoleRepositoryTests {
  
-    @Autowired private RoleRepository repo;
+    @Autowired private RoleRepository roleRepo;
      
     @Test
     public void testCreateRoles() {
-        Role user = new Role("User");
-        Role admin = new Role("Admin");
-        Role customer = new Role("Customer");
+        Role user = new Role("USER");
+        Role admin = new Role("ADMIN");
+        Role customer = new Role("CUSTOMER");
         
         List<Role> roles = new ArrayList<>();
         roles.add(user);
         roles.add(admin);
         roles.add(customer);
 
-        repo.saveAll(roles);
+        roleRepo.saveAll(roles);
          
-        List<Role> listRoles = repo.findAll();
+        List<Role> listRoles = roleRepo.findAll();
          
         assertThat(listRoles.size()).isEqualTo(3);
     }
+
+    @Test
+	public void testFindByName() {
+        Role role = new Role("EDITOR");
+        roleRepo.save(role);
+
+        Role foundRole = roleRepo.findByName("EDITOR");
+		
+		assertThat(foundRole.getName()).isEqualTo("EDITOR");
+	}
      
 }

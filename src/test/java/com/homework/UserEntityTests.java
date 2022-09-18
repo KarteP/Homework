@@ -62,10 +62,10 @@ public class UserEntityTests {
     }
 
     @Test
-    void testSetRoles() {
-        user.addRole(new Role());
-        user.addRole(new Role());
-        user.addRole(new Role());
+    void testAddRoles() {
+        user.addRole(new Role("ADMIN"));
+        user.addRole(new Role("USER"));
+        user.addRole(new Role("CUSTOMER"));
         assertThat(user.getRoles().size()).isEqualTo(3);
     }
 }

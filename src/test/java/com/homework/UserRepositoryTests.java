@@ -85,17 +85,4 @@ public class UserRepositoryTests {
 		assertThat(savedUser.getRoles().size()).isEqualTo(1);
 	}
 
-	@Test
-	public void testAddRoleToExistingUser() {
-		User user = userRepo.findById(1L).get();
-		Role roleUser = roleRepo.findByName("User");
-		Role roleCustomer = roleRepo.findByName("Customer");
-		
-		user.addRole(roleUser);
-		user.addRole(roleCustomer);
-		
-		User savedUser = userRepo.save(user);
-		
-		assertThat(savedUser.getRoles().size()).isEqualTo(2);      
-	}
 }
