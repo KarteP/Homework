@@ -3,6 +3,7 @@ package com.homework.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.homework.user.CustomUserDetails;
+import com.homework.user.Role;
+import com.homework.user.RoleRepository;
 import com.homework.user.User;
 import com.homework.user.UserRepository;
 
@@ -21,6 +24,9 @@ public class AppController {
 
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private RoleRepository roleRepo;
 	
 	@GetMapping("/")
 	public String viewHomePage() {
@@ -29,6 +35,11 @@ public class AppController {
 	
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
+		User user = new User();
+
+		Role roleUser = roleRepo.findByName("User");
+        user.addRole(roleUser);
+
 		model.addAttribute("user", new User());
 		
 		return "register";
@@ -62,7 +73,7 @@ public class AppController {
 		loggedUser.setLastName(user.getLastName());
 		loggedUser.setAddress(user.getAddress());
 		loggedUser.setBirthDate(user.getBirthDate());
-
+		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);

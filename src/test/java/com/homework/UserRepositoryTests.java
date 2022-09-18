@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import com.homework.user.Role;
+import com.homework.user.RoleRepository;
 import com.homework.user.User;
 import com.homework.user.UserRepository;
 
@@ -20,9 +22,12 @@ public class UserRepositoryTests {
 
 	@Autowired
 	private TestEntityManager entityManager;
-	
+
 	@Autowired
-	private UserRepository repo;
+    private UserRepository userRepo;
+     
+    @Autowired
+    private RoleRepository roleRepo;
 	
 	@Test
 	public void testCreateUser() {
@@ -34,7 +39,7 @@ public class UserRepositoryTests {
 		user.setAddress("Marja 1");
 		user.setBirthDate(LocalDate.of(1996, 9, 9));
 		
-		User savedUser = repo.save(user);
+		User savedUser = userRepo.save(user);
 		
 		User existingUser = entityManager.find(User.class, savedUser.getId());
 		
@@ -54,11 +59,43 @@ public class UserRepositoryTests {
 		user.setLastName("Maasikas");
 		user.setAddress("Marja 1");
 		user.setBirthDate(LocalDate.of(1996, 9, 9));
-		repo.save(user);
+		userRepo.save(user);
 
 		String email = "mari@gmail.com";
-		User user2 = repo.findByEmail(email);
+		User user2 = userRepo.findByEmail(email);
 		
 		assertThat(user2.getEmail()).isEqualTo(email);
+	}
+
+	@Test
+	public void testAddRoleToNewUser() {
+		Role roleAdmin = roleRepo.findByName("Admin");
+		
+		User user = new User();
+		user.setEmail("mari@gmail.com");
+		user.setPassword("mari123");
+		user.setFirstName("Mari");
+		user.setLastName("Maasikas");
+		user.setAddress("Marja 1");
+		user.setBirthDate(LocalDate.of(1996, 9, 9));
+		user.addRole(roleAdmin);       
+		
+		User savedUser = userRepo.save(user);
+		
+		assertThat(savedUser.getRoles().size()).isEqualTo(1);
+	}
+
+	@Test
+	public void testAddRoleToExistingUser() {
+		User user = userRepo.findById(1L).get();
+		Role roleUser = roleRepo.findByName("User");
+		Role roleCustomer = roleRepo.findByName("Customer");
+		
+		user.addRole(roleUser);
+		user.addRole(roleCustomer);
+		
+		User savedUser = userRepo.save(user);
+		
+		assertThat(savedUser.getRoles().size()).isEqualTo(2);      
 	}
 }

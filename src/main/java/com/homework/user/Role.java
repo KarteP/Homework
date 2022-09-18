@@ -10,7 +10,18 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
      
-    private String name = "ADMIN";
+    private String name;
+
+	public Role() {}
+     
+    public Role(String name) {
+        this.name = name;
+    }
+ 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
     public Integer getId() {
         return id;

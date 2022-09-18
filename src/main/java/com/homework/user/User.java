@@ -119,7 +119,7 @@ public class User {
 		return roles;
 	}
 
-	public void setRoles(Role role) {
-		roles.add(role);
+	public void addRole(Role role) {
+		this.roles.add(role);
 	}	
 }
