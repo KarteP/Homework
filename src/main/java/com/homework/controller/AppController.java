@@ -47,7 +47,9 @@ public class AppController {
 		user.setPassword(encodedPassword);
 
 		Role roleUser = roleRepo.findByName("USER");
+		Role roleAdmin = roleRepo.findByName("ADMIN");
         user.addRole(roleUser);
+		user.addRole(roleAdmin);
 
 		userRepo.save(user);
 		

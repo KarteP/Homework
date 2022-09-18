@@ -32,7 +32,7 @@ public class UserRepositoryTests {
 	@Test
 	public void testCreateUser() {
 		User user = new User();
-		user.setEmail("mari@gmail.com");
+		user.setEmail("mari1@gmail.com");
 		user.setPassword("mari123");
 		user.setFirstName("Mari");
 		user.setLastName("Maasikas");
@@ -53,7 +53,7 @@ public class UserRepositoryTests {
 	@Test
 	public void testFindByEmail() {
 		User user = new User();
-		user.setEmail("mari@gmail.com");
+		user.setEmail("mari2@gmail.com");
 		user.setPassword("mari123");
 		user.setFirstName("Mari");
 		user.setLastName("Maasikas");
@@ -61,7 +61,7 @@ public class UserRepositoryTests {
 		user.setBirthDate(LocalDate.of(1996, 9, 9));
 		userRepo.save(user);
 
-		String email = "mari@gmail.com";
+		String email = "mari2@gmail.com";
 		User user2 = userRepo.findByEmail(email);
 		
 		assertThat(user2.getEmail()).isEqualTo(email);

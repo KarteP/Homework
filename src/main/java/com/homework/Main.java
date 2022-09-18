@@ -19,35 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
-	//private static final Logger log = LoggerFactory.getLogger(ProjectApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-
-	/* 
-	//Add data to database
-	@Bean
-	public CommandLineRunner demo(UserRepository repository) {
-	  return (args) -> {
-		// save a few customers
-		User u = new User();
-		u.setEmail("m@m");
-		u.setPassword("123456");
-		u.setFirstName("mm");
-		repository.save(u);
-
-
-		// fetch all customers
-		log.info("Users found with findAll():");
-		log.info("-------------------------------");
-		for (User customer : repository.findAll()) {
-		  log.info(customer.toString());
-		}
-		log.info("");
-  
-	  };
-
-	}
-	*/
 }
