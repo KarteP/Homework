@@ -10,8 +10,8 @@
 	<div class="container text-center">
 		<h1>Home page</h1>
 		<h3><a class="register" th:href="@{/register}">Register</a></h3>
-		<h3><a th:href="@{/login}">Login</a></h3>
-		<h3><a th:href="@{/users}">All customers</a></h3>
+		<h3><a class="user-login" th:href="@{/login}">Login</a></h3>
+		<h3><a class="all-users" th:href="@{/users}">All customers</a></h3>
 
 		<div th:if="${message != null}" class="alert alert-success text-center">
 			[[${message}]]
