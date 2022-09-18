@@ -111,7 +111,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Birth date: </label>
 					<div class="col-8">
-						<input type="date" th:field="*{birthDate}" class="form-control" th:value="${user.birthDate}"/>
+						<input type="date" th:field="*{birthDate}" class="form-control" th:value="${user.birthDate}" max="2010-01-01"/>
 					</div>
 				</div>
 
