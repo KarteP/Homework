@@ -1,10 +1,10 @@
 package com.homework;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import com.homework.user.Role;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoleEntityTests {
     
@@ -13,12 +13,12 @@ public class RoleEntityTests {
     @Test
     void testSetId() {
         role.setId(10);
-        assertThat(role.getId()).isEqualTo(10);
+        assertEquals(10, role.getId());
     }
 
     @Test
     void testSetName() {
         role.setName("USER");
-        assertThat(role.getName()).isEqualTo("USER");
+        assertEquals("USER", role.getName());
     }
 }
