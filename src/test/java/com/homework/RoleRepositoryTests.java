@@ -1,6 +1,6 @@
 package com.homework;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +36,8 @@ public class RoleRepositoryTests {
         roleRepo.saveAll(roles);
          
         List<Role> listRoles = roleRepo.findAll();
-         
-        assertThat(listRoles.size()).isEqualTo(3);
+        
+        assertEquals(3, listRoles.size());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class RoleRepositoryTests {
 
         Role foundRole = roleRepo.findByName("EDITOR");
 		
-		assertThat(foundRole.getName()).isEqualTo("EDITOR");
+        assertEquals("EDITOR", foundRole.getName());
 	}
      
 }

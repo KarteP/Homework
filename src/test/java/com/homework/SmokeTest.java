@@ -1,6 +1,6 @@
 package com.homework;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +17,6 @@ public class SmokeTest {
 
 	@Test
 	public void contextLoads() throws Exception {
-		assertThat(controller).isNotNull();
+		assertNotEquals(null, controller);
 	}
 }

@@ -1,6 +1,7 @@
 package com.homework;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,12 @@ public class UserRepositoryTests {
 		
 		User existingUser = entityManager.find(User.class, savedUser.getId());
 		
-		assertThat(user.getEmail()).isEqualTo(existingUser.getEmail());
-		assertThat(user.getFirstName()).isEqualTo(existingUser.getFirstName());
-		assertThat(user.getLastName()).isEqualTo(existingUser.getLastName());
-		assertThat(user.getAddress()).isEqualTo(existingUser.getAddress());
-		assertThat(user.getBirthDate()).isEqualTo(existingUser.getBirthDate());
+		assertEquals(user.getEmail(), existingUser.getEmail());
+		assertEquals(user.getFirstName(), existingUser.getFirstName());
+		assertEquals(user.getLastName(), existingUser.getLastName());
+		assertEquals(user.getAddress(), existingUser.getAddress());
+		assertEquals(user.getBirthDate(), existingUser.getBirthDate());
+		assertEquals(user.getIsActive(), existingUser.getIsActive());
 	}
 	
 	@Test
@@ -64,7 +66,7 @@ public class UserRepositoryTests {
 		String email = "mari2@gmail.com";
 		User user2 = userRepo.findByEmail(email);
 		
-		assertThat(user2.getEmail()).isEqualTo(email);
+		assertEquals(email, user2.getEmail());
 	}
 
 	@Test
@@ -81,8 +83,7 @@ public class UserRepositoryTests {
 		user.addRole(roleAdmin);       
 		
 		User savedUser = userRepo.save(user);
-		
-		assertThat(savedUser.getRoles().size()).isEqualTo(1);
-	}
 
+		assertEquals(1, savedUser.getRoles().size());
+	}
 }
