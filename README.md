@@ -13,3 +13,6 @@ Technologies:
 
 To build a jar file:
 ./gradlew bootJar
+
+To run a jar file:
+java -jar [jar file name here]
