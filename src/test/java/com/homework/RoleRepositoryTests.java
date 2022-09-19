@@ -22,6 +22,7 @@ public class RoleRepositoryTests {
  
     @Autowired private RoleRepository roleRepo;
      
+    //Data added in import.sql causes failure.
     @Test
     public void testCreateRoles() {
         Role user = new Role("USER");
